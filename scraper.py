@@ -62,8 +62,8 @@ sites = {
 }
 categories = {
     "TVs": Category("TVs"),
-    "HPs": Category("Headphones"),
-    "WBs": Category("Waterbottles")
+    "Headphones": Category("Headphones"),
+    "Water Bottles": Category("Waterbottles")
 }
 item_data = {
     "JLTVs": ItemData("John Lewis TVs",
@@ -71,11 +71,11 @@ item_data = {
                       sites["JL"],
                       "https://www.johnlewis.com/browse/electricals/televisions/all-tvs/_/N-6srf"),
     "JLHPs": ItemData("John Lewis Headphones",
-                      categories["HPs"],
+                      categories["Headphones"],
                       sites["JL"],
                       "https://www.johnlewis.com/browse/electricals/headphones/headphones/_/N-al9"),
     "JLWBs": ItemData("John Lewis Waterbottles",
-                      categories["WBs"],
+                      categories["Water Bottles"],
                       sites["JL"],
                       "https://www.johnlewis.com/browse/sport-leisure/gym-accessories/water-bottle/_/N-eyuZ1z075od"),
     "AZTVs": ItemData("Amazon TVs",
@@ -83,11 +83,11 @@ item_data = {
                       sites["AZ"],
                       "https://www.amazon.co.uk/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords=TV"),
     "AZHPs": ItemData("Amazon Headphones",
-                      categories["HPs"],
+                      categories["Headphones"],
                       sites["AZ"],
                       "https://www.amazon.co.uk/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords=Headphones"),
     "AZWBs": ItemData("Amazon Waterbottles",
-                      categories["WBs"],
+                      categories["Water Bottles"],
                       sites["AZ"],
                       "https://www.amazon.co.uk/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords=Waterbottle"),
     "AGTVs": ItemData("Argos TVs",
@@ -95,11 +95,11 @@ item_data = {
                       sites["AG"],
                       "https://www.argos.co.uk/search/tv/"),
     "AGHPs": ItemData("Argos Headphones",
-                      categories["HPs"],
+                      categories["Headphones"],
                       sites["AG"],
                       "https://www.argos.co.uk/search/headphones/"),
     "AGWBs": ItemData("Argos Waterbottles",
-                      categories["WBs"],
+                      categories["Water Bottles"],
                       sites["AG"],
                       "https://www.argos.co.uk/search/water-bottle/")
 }
