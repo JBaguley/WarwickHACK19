@@ -39,7 +39,7 @@ class Item:
         self.review = review
         self.link = link
         self.image = image
-        self.score = price/review
+        self.score = float('%.3f'%(price/review))
 
 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36'}
 
@@ -59,7 +59,7 @@ sites = {
     "AG": Site("Argos", "https://www.argos.co.uk",
                 SoupFinder("div",{"class": "ac-product-name"}, lambda a : a.text), 
                 SoupFinder("span",{"class": "ac-product-price__amount"}, lambda a : float(a.text.replace(",","")[1:a.text.index('.')+3])), 
-                SoupFinder("div",{"class": "ac-star-rating"}, lambda a : float(a.get('data-star-rating'))),
+                SoupFinder("div",{"class": "ac-star-rating"}, lambda a : float(a.get('data-star-rating')[:4])),
                 SoupFinder("a",{"class": "ac-product-link ac-product-card__image"}, lambda a : "https://www.argos.co.uk"+a.get('href')),
                 SoupFinder("div",{"class": "ac-product-image__proportion--square"}, lambda a : a.find("img").get('src')))
 }
