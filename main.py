@@ -5,6 +5,7 @@ import json
 import scraper
 
 
+
 app = Flask(__name__)
 
 minPrice = 0
@@ -21,9 +22,13 @@ def index():
 
         results = scraper.getAllItems(scraper.categories[product])
         finalResults =  []
+        i = 0
         for result in results:
+            if i >= 10:
+                break
             if (result.price >= int(minPrice)) & (result.price <= int(maxPrice)):
                 finalResults.append(result)
+                i += 1
 
         return render_template('index.html', products = products, product = product, minPrice = minPrice, maxPrice = maxPrice, results = finalResults)
 

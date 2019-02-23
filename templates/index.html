@@ -46,11 +46,11 @@
             </form>
             <ul style = "list-style-type : none;">
                 {% for item in results %}
-                <li>
-                    <!-- display an item -->
-                    {{ item.name }}     {{ item.price }}     {{ item.rating }}
-                </li>
-                {% endfor %}
+                    <li>
+                        <!-- display an item -->
+                        {{ item.name }}     {{ item.price }}     {{ item.review }}
+                    </li>
+                {%- endfor %}
             </ul>
         {% endif %}
         </div>
