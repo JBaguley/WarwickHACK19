@@ -1,5 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
+from sklearn.cluster import AgglomerativeClustering
+import numpy as np
+
 
 class Site:
     def __init__(self, name, link, name_finder, price_finder, review_finder, link_finder, image_finder):
@@ -127,10 +130,15 @@ def getAllItems(category):
     for item in item_data:
         if item_data[item].category == category:
             items += getItems(item_data[item])
+    # getClusters(items)
     return items
 
 # items = getItems(item_data["AGHPs"])
 
+def getClusters(items):
+    array = np.array([[item.price, item.review] for item in items])
+    clustering = AgglomerativeClustering(n_clusters=3).fit(array)
+    print(clustering.labels_)
 
 
 if __name__ == "__main__":
