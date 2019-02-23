@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Choose</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css">
+</head>
+
+
+<body>
+
+    <header>
+        <h1>Choose</h1>
+        <!-- LOGO -->
+    </header>
+
+    
+    <!-- choose product to look for -->
+    <div class = "product">
+        <h3>Products<h3>
+        <ul style = "list-style-type : none;">
+            {% for product in products %}
+            <li>
+                <form method = "POST">
+                    <input type = "submit" style = "cursor: pointer; border:none; background:none" name = "product" value = "{{ product }}">
+                </form>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class = "choose_product">
+        <!-- choose product to buy -->
+        {% if results %}
+            <!-- price range -->
+            <form method = "POST">
+                <p>Min price<input type = "text" name = "min price"/></p>
+                <p>Max price<input type = "text" name = "min price"/></p>
+                <p><input type = "submit" value = "submit" /></p>
+            </form>
+            <ul style = "list-style-type : none;">
+                {% for item in results %}
+                <li>
+                    <!-- display an item -->
+                    {{ item.name }}     {{ item.price }}     {{ item.rating }}
+                </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        </div>
+
+</body>
+</html>

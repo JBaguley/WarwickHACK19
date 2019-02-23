@@ -1,62 +1,40 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 import io
 from flask_cors import CORS
 import json
+
+
 app = Flask(__name__)
-CORS(app)
 
 
-@app.route("/", methods=["GET"])
+@app.route("/", methods = ["GET", "POST"])
 def index():
-    html = ""
-    with open("index.html", "r") as f:
-        html = f.read()
-    return html
+    products = ['TVs', 'Headphones', 'Water Bottles']
+
+    if request.method == 'POST':
+        product = request.form['product']
+
+        if product == "TVs":
+            results = [
+                    {'name': 'samsung', 'price': '100', 'rating' : '4.5'},
+                    {'name': 'LG', 'price': '100', 'rating' : '4.5'},
+                    {'name': 'philips', 'price': '600', 'rating' : '4.5'},
+                    {'name': 'panasonic', 'price': '550', 'rating' : '4.5'},
+                    {'name': 'samsung', 'price': '40', 'rating' : '3.5'}
+                ]
+        elif product == "Headphones":
+            results = [{'name': 'bose', 'price': '70', 'rating' : '4.7'}]
+        elif product == "Water Bottles":
+            results = [{'name': 'sistema', 'price': '5', 'rating' : '4.4'}]
+
+
+        return render_template('index.html', products = products, results = results)
+
+
+    return render_template('index.html', products = products)
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-# @app.route("/api/read", methods=["POST"])
-# def receiveDataRead():
-#     data = datatoimage.imageToData(request.json["image-data"])
-#     outstring = ""
-#     for i in data:
-#         outstring += data[i]+"$"
-#     return outstring
-
-
-
-
-
-# @app.route("/create", methods=["GET"])
-# def create():
-#     html = ""
-#     with open("create.html", "r") as f:
-#         html = f.read()
-#     return html
-
-
-# @app.route("/image", methods=["POST"])
-# def returnImage():
-#     return render_template('image.html', imagedata = request.form["image-data"])
-
-
-# @app.route("/image/download", methods=["POST"])
-# def DownloadLogFile():
-#     try:
-#         tempFile = io.BytesIO(base64.b64decode(request.form["image-data"]));
-#         return send_file(, as_attachment=True)
-#     except Exception as e:
-#         self.log.exception(e)
-#         self.Error(400)
+if __name__ == '__main__':
+   app.run()
