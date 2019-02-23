@@ -6,12 +6,25 @@
     <title>Choose</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
 
 
 <body>
-
+    <div class="nav">
+        <div style="width:100%">
+            <img src="{{ url_for('static', filename='images/logo.png') }}">
+        </div>
+        <div style="width:100%">
+            <ul>
+                <li>Home</li>
+                <li>Furniture</li>
+                <li>Electricals</li>
+                <li>Beauty</li>
+                <li>Sport</li>
+            </ul>
+        </div>
+    </div>
     <header>
         <h1>Choose</h1>
         <!-- LOGO -->
