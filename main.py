@@ -2,10 +2,13 @@ from flask import Flask, request, jsonify, render_template
 import io
 from flask_cors import CORS
 import json
+import scraper
 
 
 app = Flask(__name__)
 
+minPrice = 0
+maxPrice = 1000
 
 @app.route("/", methods = ["GET", "POST"])
 def index():
@@ -13,22 +16,16 @@ def index():
 
     if request.method == 'POST':
         product = request.form['product']
+        minPrice = request.form['min price']
+        maxPrice = request.form['max price']
 
-        if product == "TVs":
-            results = [
-                    {'name': 'samsung', 'price': '100', 'rating' : '4.5'},
-                    {'name': 'LG', 'price': '100', 'rating' : '4.5'},
-                    {'name': 'philips', 'price': '600', 'rating' : '4.5'},
-                    {'name': 'panasonic', 'price': '550', 'rating' : '4.5'},
-                    {'name': 'samsung', 'price': '40', 'rating' : '3.5'}
-                ]
-        elif product == "Headphones":
-            results = [{'name': 'bose', 'price': '70', 'rating' : '4.7'}]
-        elif product == "Water Bottles":
-            results = [{'name': 'sistema', 'price': '5', 'rating' : '4.4'}]
+        results = scraper.getAllItems(scraper.categories[product])
+        finalResults =  []
+        for result in results:
+            if (result.price >= int(minPrice)) & (result.price <= int(maxPrice)):
+                finalResults.append(result)
 
-
-        return render_template('index.html', products = products, results = results)
+        return render_template('index.html', products = products, product = product, minPrice = minPrice, maxPrice = maxPrice, results = finalResults)
 
 
     return render_template('index.html', products = products)
