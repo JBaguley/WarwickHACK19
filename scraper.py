@@ -57,7 +57,7 @@ sites = {
                 SoupFinder("div",{"class": "ac-product-name"}, lambda a : a.text), 
                 SoupFinder("span",{"class": "ac-product-price__amount"}, lambda a : float(a.text.replace(",","")[1:a.text.index('.')+3])), 
                 SoupFinder("div",{"class": "ac-star-rating"}, lambda a : float(a.get('data-star-rating'))),
-                SoupFinder("a",{"class": "ac-product-link"}, lambda a : "https://www.argos.co.uk"+a.get('href')),
+                SoupFinder("a",{"class": "ac-product-link ac-product-card__image"}, lambda a : "https://www.argos.co.uk"+a.get('href')),
                 SoupFinder("div",{"class": "ac-product-image__proportion--square"}, lambda a : a.find("img").get('src')))
 }
 categories = {
@@ -131,9 +131,11 @@ def getAllItems(category):
 
 # items = getItems(item_data["AGHPs"])
 
-items = getAllItems(categories["Headphones"])
 
-sorted_items = sorted(items, key=lambda x: x.score)
 
-# for item in sorted_items:
-#     print(item.name[0:10]+ " | " + "{:<12}".format(str(item.price)) + " | " + "{:<4}".format(str(item.review))+ " | "+str(item.score)[:5]+ " | "+str(item.link)[:20]+ " | "+str(item.image)[:20])
+if __name__ == "__main__":
+    items = getAllItems(categories["Headphones"])
+
+    sorted_items = sorted(items, key=lambda x: x.score)
+    for item in sorted_items:
+        print(item.name[0:10]+ " | " + "{:<12}".format(str(item.price)) + " | " + "{:<4}".format(str(item.review))+ " | "+str(item.score)[:5]+ " | "+str(item.link)[:20]+ " | "+str(item.image)[:20])

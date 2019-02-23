@@ -12,43 +12,27 @@
 
 <body>
     <div class="nav">
-        <div style="width:100%">
-            <img src="{{ url_for('static', filename='images/logo.png') }}">
-        </div>
+        <img style="height:40px;margin: 10px auto 0px auto" src="{{ url_for('static', filename='images/logo.png') }}">
         <div style="width:100%">
             <ul>
                 <li>Home</li>
                 <li>Furniture</li>
-                <li>Electricals</li>
-                <li>Beauty</li>
-                <li>Sport</li>
+                {% for p in products %}
+                <li>
+                    <form method = "POST">
+                        <input type = "submit" style = "cursor: pointer; border:none; background:none" name = "product" value = "{{ p }}">
+                        <input type = "hidden" name = "min price" value = "0"/>
+                        <input type = "hidden" name = "max price" value = "1000"/>
+                    </form>
+                </li>
+                {% endfor %}
             </ul>
         </div>
-    </div>
-    <header>
-        <h1>Choose</h1>
-        <!-- LOGO -->
-    </header>
-
-    
-    <!-- choose product to look for -->
-    <div class = "product">
-        <h3>Products<h3>
-        <ul style = "list-style-type : none;">
-            {% for p in products %}
-            <li>
-                <form method = "POST">
-                    <input type = "submit" style = "cursor: pointer; border:none; background:none" name = "product" value = "{{ p }}">
-                    <input type = "hidden" name = "min price" value = "0"/>
-                    <input type = "hidden" name = "max price" value = "1000"/>
-                </form>
-            </li>
-            {% endfor %}
-        </ul>
     </div>
 
     <div class = "choose_product">
         <!-- choose product to buy -->
+        <div class="bordered_box"><h2>Our Top Picks</h2></div>
         {% if results %}
             <!-- price range -->
             <form method = "POST">
@@ -57,14 +41,30 @@
                 <input type = "hidden" name = "product" value = "{{ product }}"/>
                 <p><input type = "submit" value = "submit" /></p>
             </form>
-            <ul style = "list-style-type : none;">
+            <table>
+                <tr>
+                    <td></td>
+                    <td>Product Name</td>
+                    <td>Price</td>
+                    <td>Reviews</td>
+                    <td>Performance Score</td>
+                    <td></td>
+                </tr>
                 {% for item in results %}
-                <li>
-                    <!-- display an item -->
-                    {{ item.name }}     {{ item.price }}     {{ item.rating }}
-                </li>
+                    
+                    <tr>
+                        <td><img src="{{ item.image }}" style="width:200px"></td>
+                        <td><a href="{{ item.link }}">{{ item.name }}</a></td>
+                        <td>{{ item.price }}</td>
+                        <td>{{ item.review }}</td>
+                        <td>{{ item.score}}</td>
+                        <td>{{ item.logo}}</td>
+                    </tr>
+
+
                 {% endfor %}
-            </ul>
+            </table>
+
         {% endif %}
         </div>
 

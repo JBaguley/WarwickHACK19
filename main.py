@@ -20,10 +20,15 @@ def index():
         maxPrice = request.form['max price']
 
         results = scraper.getAllItems(scraper.categories[product])
+        results = sorted(results, key=lambda x: x.score)
         finalResults =  []
+        i = 0
         for result in results:
+            if i >= 10:
+                break
             if (result.price >= int(minPrice)) & (result.price <= int(maxPrice)):
                 finalResults.append(result)
+                i += 1
 
         return render_template('index.html', products = products, product = product, minPrice = minPrice, maxPrice = maxPrice, results = finalResults)
 
