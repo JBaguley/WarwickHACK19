@@ -131,9 +131,9 @@ def getAllItems(category):
 
 # items = getItems(item_data["AGHPs"])
 
-items = getAllItems(categories["HPs"])
+items = getAllItems(categories["Headphones"])
 
 sorted_items = sorted(items, key=lambda x: x.score)
 
-for item in sorted_items:
-    print(item.name[0:10]+ " | " + "{:<12}".format(str(item.price)) + " | " + "{:<4}".format(str(item.review))+ " | "+str(item.score)[:5]+ " | "+str(item.link)[:20]+ " | "+str(item.image)[:20])
+# for item in sorted_items:
+#     print(item.name[0:10]+ " | " + "{:<12}".format(str(item.price)) + " | " + "{:<4}".format(str(item.review))+ " | "+str(item.score)[:5]+ " | "+str(item.link)[:20]+ " | "+str(item.image)[:20])

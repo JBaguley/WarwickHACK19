@@ -22,10 +22,12 @@
     <div class = "product">
         <h3>Products<h3>
         <ul style = "list-style-type : none;">
-            {% for product in products %}
+            {% for p in products %}
             <li>
                 <form method = "POST">
-                    <input type = "submit" style = "cursor: pointer; border:none; background:none" name = "product" value = "{{ product }}">
+                    <input type = "submit" style = "cursor: pointer; border:none; background:none" name = "product" value = "{{ p }}">
+                    <input type = "hidden" name = "min price" value = "0"/>
+                    <input type = "hidden" name = "max price" value = "1000"/>
                 </form>
             </li>
             {% endfor %}
@@ -37,9 +39,11 @@
         {% if results %}
             <!-- price range -->
             <form method = "POST">
-                <p>Min price<input type = "text" name = "min price"/></p>
-                <p>Max price<input type = "text" name = "min price"/></p>
+                <p>Min price<input type = "text" name = "min price" value = "{{ minPrice }}"/></p>
+                <p>Max price<input type = "text" name = "max price" value = "{{ maxPrice }}"/></p>
                 <input type = "hidden" name = "product" value = "{{ product }}"/>
+
+                {{ product }}
                 <p><input type = "submit" value = "submit" /></p>
             </form>
             <ul style = "list-style-type : none;">

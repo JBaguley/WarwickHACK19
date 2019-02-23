@@ -7,6 +7,8 @@ import scraper
 
 app = Flask(__name__)
 
+minPrice = 0
+maxPrice = 1000
 
 @app.route("/", methods = ["GET", "POST"])
 def index():
@@ -14,10 +16,16 @@ def index():
 
     if request.method == 'POST':
         product = request.form['product']
+        minPrice = request.form['min price']
+        maxPrice = request.form['max price']
 
         results = scraper.getAllItems(scraper.categories[product])
+        finalResults =  []
+        for result in results:
+            if (result.price >= int(minPrice)) & (result.price <= int(maxPrice)):
+                finalResults.append(result)
 
-        return render_template('index.html', products = products, results = results)
+        return render_template('index.html', products = products, product = product, minPrice = minPrice, maxPrice = maxPrice, results = finalResults)
 
 
     return render_template('index.html', products = products)
